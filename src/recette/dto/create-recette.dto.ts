@@ -2,11 +2,16 @@ import { Admin } from "src/admin/entities/admin.entity";
 import { Double } from "typeorm";
 
 export class CreateRecetteDto {
-    date: Date;
+    date_operation: Date;
+    date_facture: Date;
     client: string;
     description: string;
-    montant: number;
+    montant_HT: number;
+    TVA: number;
     admin: number;
-    isValidate: boolean;
     statu: string;
+    ref_lettrage: string;
+    numero_facture: number;
+
+
 }

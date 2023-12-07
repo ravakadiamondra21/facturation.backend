@@ -20,11 +20,13 @@ export class AdminController {
 
   @Get()
   findAll() {
+    console.log("findall")
     return this.adminService.findAll();
   }
 
   @Get(':mail')
   async findOne(@Param('mail') mail: string) {
+    console.log("mail")
     return this.adminService.findOne(mail);
   }
 
@@ -37,4 +39,6 @@ export class AdminController {
   async remove(@Param('id') id: string) {
     return this.adminService.remove(+id);
   }
+
+  
 }

@@ -3,10 +3,14 @@ import { Double } from 'typeorm';
 import { CreateRecetteDto } from './create-recette.dto';
 
 export class UpdateRecetteDto {
-    date: Date;
+    date_operation: Date;
+    date_facture: Date;
     client: string;
     description: string;
-    montant: number;
-    isValidate: boolean;
+    montant_HT: number;
+    TVA: number;
+    admin: number;
     statu: string;
+    ref_lettrage: string;
+    numero_facture: number;
 }

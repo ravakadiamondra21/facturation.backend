@@ -6,6 +6,7 @@ import { Admin } from './entities/admin.entity';
 import { ConfigModule } from '@nestjs/config';
 
 
+
 @Module({
   controllers: [AdminController],
   providers: [AdminService],

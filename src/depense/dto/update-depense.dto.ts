@@ -1,12 +1,17 @@
 
-import { CreateDepenseDto } from './create-depense.dto';
 
 export class UpdateDepenseDto{
-    date: Date;
+    date_operation: Date;
+    date_facture: Date;
+    numero_facture: number;
     type: string;
+    circuit: string;
     fournisseur: string;
     description: string;
-    montant: number;
+    montant_HT: number;
+    TVA: number;
     isValidate: boolean;
     statu: string;
+    admin: number;
+    ref_lettrage: string;
 }

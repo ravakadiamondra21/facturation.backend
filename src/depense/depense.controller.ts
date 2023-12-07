@@ -17,7 +17,7 @@ export class DepenseController {
     return this.depenseService.findAll();
   }
 
-  @Get(':id')
+  @Get('/id/:id')
   async findOne(@Param('id') id: number) {
     return this.depenseService.findOne(+id);
   }
@@ -32,19 +32,49 @@ export class DepenseController {
     return this.depenseService.remove(+id);
   }
 
-  @Get('/date/:date')
-  async findByDate(@Param('date') date: Date){
-    return this.depenseService.findByDate(date);
+  @Get('/dateFacture/:date_facture')
+  async findByDateFacture(@Param('date_facture') date: Date){
+    return this.depenseService.findByDateFacture(date);
   }
 
-  @Get('/validation/:isValidate')
-  findByValidation(@Param('isValidate') isValidate: string){
-
-    return this.depenseService.findByValidation(JSON.parse(isValidate));
+  @Get('/circuit/:circuit')
+  async findByCircuit(@Param('circuit') circuit: string){
+    return this.depenseService.findByCircuit(circuit)
   }
+
+  @Get('/date_operation/:date_operation')
+  async findDateOperation(@Param('date_operation') date_operation: Date){
+    return this.depenseService.findDateOperation(date_operation)
+  }
+
+  @Get('/dateOperation/:date/:banque/:other')
+  async findByDateOperation(@Param('date') date: Date, @Param('banque') banque:string, @Param('other') other:string){
+    return this.depenseService.findByDateOperation(date, banque, other);
+  }
+
 
    @Get('/statu/:statu/:isValidate')
    async findByStatu(@Param('statu') statu: string, @Param('isValidate') isValidate: string){
      return this.depenseService.findStatu(statu, JSON.parse(isValidate))
    }
+
+   @Get('/sort')
+  async sortBy(){
+    console.log("sort")
+    return this.depenseService.sortBy()
+  }
+
+  @Get('/count/:ref_lettrage')
+  async count(@Param('ref_lettrage') ref_lettrage : string){
+    return this.depenseService.countByRef(ref_lettrage)
+  }
+  // @Get('count/:date')
+  // countRecette( @Param("date") date:any){
+  //   return this.depenseService.countDepense(date)
+  // }
+
+  @Get('/matched')
+  async findMatched(){
+    return this.depenseService.findMatched()
+  }
 }

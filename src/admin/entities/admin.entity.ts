@@ -1,18 +1,19 @@
 import { Recette } from "src/recette/entities/recette.entity";
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { ColdObservable } from "rxjs/internal/testing/ColdObservable";
 
 @Entity()
 export class Admin {
-    @Column({primary: true})
+    @Column({primary: true, width: 10})
     id: number;
-    @Column({length: 20})
+    @Column({primary: true, length: 50})
     mail: string;
-    @Column()
+    @Column({length: 30})
     nom: string;
-    @Column()
+    @Column({length: 30})
     prenom: string;
-    @Column()
+    @Column({length: 13})
     mdp: string;
     @OneToMany(() => Recette, (recette) => recette.admin)
     recettes: Recette[];
