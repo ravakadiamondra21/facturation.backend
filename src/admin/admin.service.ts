@@ -5,21 +5,13 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AdminService {
   constructor(private readonly entityManager: EntityManager,
-    @InjectRepository(Admin) private adminRepository: Repository<Admin>){}
-
-  // async hashPassword(password: string): Promise<string>{
-  //   const hashedPassword = await bcrypt.hash(password, 12, (err) =>{
-  //     if(err){
-  //       console.error('error hashing', err)
-  //     }
-  //     else{console.log('hashed password')}
-  //   })
-  //   return hashedPassword;
-  // }
+    @InjectRepository(Admin) private adminRepository: Repository<Admin>)
+    {}
 
   async create(createAdminDto: CreateAdminDto) {
     return this.adminRepository.save(createAdminDto)
@@ -45,4 +37,14 @@ export class AdminService {
   async remove(id: number) {
     return this.adminRepository.delete({id});
   }
+
+  // async hashedPassword(mdp: string) : Promise<string>{
+  //   const saltRounds= 10;
+  //   return await bcrypt.hash(mdp, saltRounds);
+  // }
+
+  async comparePassword(mdp: string, hashedMdp: string): Promise<boolean>{
+    return await bcrypt.compare(mdp, hashedMdp);
+  }
+
 }

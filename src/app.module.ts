@@ -7,9 +7,10 @@ import { AdminModule } from './admin/admin.module';
 import { join } from 'path';
 import { RecetteModule } from './recette/recette.module';
 import { DepenseModule } from './depense/depense.module';
-import { AuthModule } from './auth/auth.module';
+
 import { SoldeModule } from './solde/solde.module';
 import { BanqueModule } from './banque/banque.module';
+import { AuthModule } from './auth/auth.module';
 
 
 
