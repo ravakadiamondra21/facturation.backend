@@ -19,23 +19,23 @@ export class BanqueController {
     return this.banqueService.find();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.banqueService.findOne(+id);
+  // // @Get(':id')
+  // // findOne(@Param('id') id: string) {
+  // //   return this.banqueService.findOne(+id);
+  // // }
+
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateBanqueDto: UpdateBanqueDto) {
+  //   return this.banqueService.update(+id, updateBanqueDto);
   // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBanqueDto: UpdateBanqueDto) {
-    return this.banqueService.update(+id, updateBanqueDto);
-  }
+  // // @Delete(':id')
+  // // remove(@Param('id') id: string) {
+  // //   return this.banqueService.remove(+id);
+  // // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.banqueService.remove(+id);
+  // @Get("/count/:ref_lettrage")
+  // async count(@Param("ref_lettrage") ref_lettrage: string){
+  //   return this.banqueService.countByRef(ref_lettrage);
   // }
-
-  @Get("/count/:ref_lettrage")
-  async count(@Param("ref_lettrage") ref_lettrage: string){
-    return this.banqueService.countByRef(ref_lettrage);
-  }
 }

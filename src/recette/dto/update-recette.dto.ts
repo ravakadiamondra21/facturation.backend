@@ -11,6 +11,6 @@ export class UpdateRecetteDto {
     TVA: number;
     admin: number;
     statu: string;
-    ref_lettrage: string;
     numero_facture: number;
+    relation: string;
 }

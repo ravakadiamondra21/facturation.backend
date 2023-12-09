@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import {format} from 'date-fns';
 import { Admin } from 'src/admin/entities/admin.entity';
 import { EntityManager, Like, Not, Repository } from 'typeorm';
 import { CreateDepenseDto } from './dto/create-depense.dto';
@@ -29,30 +30,28 @@ export class DepenseService {
     return this.depenseRepository.find();
   }
 
-  async findOne(id: number) {
-    return this.depenseRepository.findOneBy({id})
+  async findOne(id_depense: number) {
+    return this.depenseRepository.findOneBy({id_depense})
   }
 
-  async update(id: number, updateDepenseDto: UpdateDepenseDto) {
-    const depense = await this.depenseRepository.findOneBy({id});
+  async update(id_depense: number, updateDepenseDto: UpdateDepenseDto) {
+    const depense = await this.depenseRepository.findOneBy({id_depense});
     depense.date_operation = updateDepenseDto.date_operation;
     depense.type = updateDepenseDto.type;
     depense.fournisseur = updateDepenseDto.fournisseur;
     depense.description = updateDepenseDto.description;
     depense.montant_HT = updateDepenseDto.montant_HT;
-    depense.isValidate = updateDepenseDto.isValidate;
     depense.statu = updateDepenseDto.statu;
     depense.TVA = updateDepenseDto.TVA;
     depense.admin.id = updateDepenseDto.admin;
     depense.circuit = updateDepenseDto.circuit;
     depense.date_facture = updateDepenseDto.date_facture;
     depense.numero_facture = updateDepenseDto.numero_facture;
-    depense.ref_lettrage = updateDepenseDto.ref_lettrage;
     return await this.entityManager.save(depense);
   }
 
-  remove(id: number) {
-    return this.depenseRepository.delete({id});
+  remove(id_depense: number) {
+    return this.depenseRepository.delete({id_depense});
   }
 
   findByDateFacture(date : Date){
@@ -61,7 +60,7 @@ export class DepenseService {
         date_facture : date
       },
       order: {
-        id : "DESC"
+        id_depense : "DESC"
       }
     })
   }
@@ -72,7 +71,7 @@ export class DepenseService {
         circuit: code
       },
       order: {
-        id: 'DESC'
+        id_depense: 'DESC'
       }
     })
   }
@@ -84,69 +83,74 @@ export class DepenseService {
         date_operation: date
       },
       order: {
-        id: 'DESC'
+        id_depense: 'DESC'
       }
     })
   }
 
-  findByDateOperation(date : Date, banque: string, other: string){
-    return this.depenseRepository.find({
-      where: [
-        {
-          date_operation : date,
-          statu : banque,
-          ref_lettrage : ""
-        },
-        {
-          date_operation: date,
-          statu: other,
-          ref_lettrage : ""
-        }
-      ],
-      order: {
-        id : "DESC"
-      }
-    })
+  findByDateOperation(date : string, banque: string, other: string){
+    
+    return this.depenseRepository.query('select * from depense where id_depense not in (select depenseIdDepense from relation_depense) and'
+    + ' date_operation = "'+ date+ '" and statu = "' +banque+ '"')
+
+    // return this.depenseRepository.find({
+    //   where: [
+    //     {
+    //       date_operation : date,
+    //       statu : banque,
+    //     },
+    //     {
+    //       date_operation: date,
+    //       statu: other,
+    //     }
+    //   ],
+    //   order: {
+    //     id_depense : "DESC"
+    //   }
+    // })
+
+    
   }
 
-  // findByValidation(isValidate : boolean){
-  //   return this.depenseRepository.findBy({isValidate})
+
+  // // findByValidation(isValidate : boolean){
+  // //   return this.depenseRepository.findBy({isValidate})
+    
+  // // }
+  
+  // findStatu(statu: string, isValidate: boolean){
+  //   return this.depenseRepository.findBy({statu, isValidate})
     
   // }
-  
-  findStatu(statu: string, isValidate: boolean){
-    return this.depenseRepository.findBy({statu, isValidate})
-    
-  }
 
   
   sortBy(){
     return this.depenseRepository.find({
       take : 10,
       order : {
-        id : "DESC"
+        id_depense : "DESC"
       }
     })
   }
 
-  // countDepense(date){
-  //   return this.depenseRepository.countBy({date})
+  // // countDepense(date){
+  // //   return this.depenseRepository.countBy({date})
+  // // }
+
+  // countByRef(notnull : string){
+  //   return this.depenseRepository.countBy({
+  //     ref_lettrage : Like('%'+notnull+'%')  
+  //   })
   // }
 
-  countByRef(notnull : string){
-    return this.depenseRepository.countBy({
-      ref_lettrage : Like('%'+notnull+'%')  
-    })
-  }
-
-  findMatched(){
-    return this.depenseRepository.find({
-      where: {
-        ref_lettrage: Like('%B%')
-      },
-      order: {
-        ref_lettrage: 'DESC'
-      }
-    })
-  }
+  // findMatched(){
+  //   return this.depenseRepository.find({
+  //     where: {
+  //       ref_lettrage: Like('%B%')
+  //     },
+  //     order: {
+  //       ref_lettrage: 'DESC'
+  //     }
+  //   })
+  // }
 }

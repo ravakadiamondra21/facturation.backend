@@ -10,8 +10,7 @@ export class UpdateDepenseDto{
     description: string;
     montant_HT: number;
     TVA: number;
-    isValidate: boolean;
     statu: string;
     admin: number;
-    ref_lettrage: string;
+    relation: string;
 }

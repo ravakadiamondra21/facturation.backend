@@ -18,30 +18,27 @@ export class BanqueService {
   }
 
   find(){
-    return this.banqueRepository.find({
-      where : {
-        ref_lettrage : ""
-      }
-    })
+    return this.banqueRepository.query('select * from banque where id_banque not in'+
+    '(select banqueIdBanque from relation_depense) and id_banque not in (select banqueIdBanque from relation_recette)')
   }
 
   
-  async update(id: number, updateBanqueDto: UpdateBanqueDto) {
-    const banque = await this.banqueRepository.findOneByOrFail({id})
-    banque.chemin = updateBanqueDto.chemin;
-    banque.ref_lettrage = updateBanqueDto.ref_lettrage;
+  // async update(id: number, updateBanqueDto: UpdateBanqueDto) {
+  //   const banque = await this.banqueRepository.findOneByOrFail({id})
+  //   banque.chemin = updateBanqueDto.chemin;
+  //   banque.ref_lettrage = updateBanqueDto.ref_lettrage;
     
-    return await this.entityManager.save(banque)
-  }
-
-  
-  // remove(id: number) {
-  //   return `This action removes a #${id} banque`;
+  //   return await this.entityManager.save(banque)
   // }
 
-  countByRef(notnull : string){
-    return this.banqueRepository.countBy({
-      ref_lettrage : Like('%'+notnull+'%')  
-    })
-  }
+  
+  // // remove(id: number) {
+  // //   return `This action removes a #${id} banque`;
+  // // }
+
+  // countByRef(notnull : string){
+  //   return this.banqueRepository.countBy({
+  //     ref_lettrage : Like('%'+notnull+'%')  
+  //   })
+  // }
 }

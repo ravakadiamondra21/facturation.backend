@@ -1,11 +1,13 @@
-import { Column, Entity } from "typeorm";
+import { type } from "os";
+import { RelationDepense } from "src/relation-depense/entities/relation-depense.entity";
+import { RelationRecette } from "src/relation-recette/entities/relation-recette.entity";
+import { Column, Entity, OneToMany } from "typeorm";
 
 @Entity()
 export class Banque {
     @Column({primary: true, generated: true})
-    id: number;
-    @Column({length: 8})
-    ref_lettrage: string;
+    id_banque: number;
+
     @Column()
     date_operation: Date;
     @Column({length: 50})
@@ -18,4 +20,10 @@ export class Banque {
     solde: Number;
     @Column({length: 8})
     chemin: string
+
+    @OneToMany(type => RelationRecette, relationRecette => relationRecette.banque)
+    relationRecette : RelationRecette[];
+
+    @OneToMany(type => RelationDepense, relationDepense => relationDepense.depense)
+    relationDepense : RelationDepense[]
 }

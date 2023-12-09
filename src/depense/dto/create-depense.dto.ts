@@ -1,4 +1,5 @@
 export class CreateDepenseDto {
+    id_depense: number;
     date_operation: Date;
     date_facture: Date;
     numero_facture: number;
@@ -8,9 +9,6 @@ export class CreateDepenseDto {
     description: string;
     montant_HT: number;
     TVA: number;
-    isValidate: boolean;
     statu: string;
     admin: number;
-    ref_lettrage: string;
-
 }

@@ -8,9 +8,10 @@ import { join } from 'path';
 import { RecetteModule } from './recette/recette.module';
 import { DepenseModule } from './depense/depense.module';
 
-import { SoldeModule } from './solde/solde.module';
 import { BanqueModule } from './banque/banque.module';
 import { AuthModule } from './auth/auth.module';
+import { RelationDepenseModule } from './relation-depense/relation-depense.module';
+import { RelationRecetteModule } from './relation-recette/relation-recette.module';
 
 
 
@@ -35,8 +36,9 @@ import { AuthModule } from './auth/auth.module';
     RecetteModule,
     DepenseModule,
     AuthModule,
-    SoldeModule,
     BanqueModule,
+    RelationDepenseModule,
+    RelationRecetteModule,
 
   ],
   controllers: [AppController],
