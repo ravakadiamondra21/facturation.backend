@@ -18,7 +18,7 @@ export class RelationRecetteController {
   }
 
 
-  @Get()
+  @Get('/matched')
   findAll() {
     return this.relationRecetteService.findAll();
   }

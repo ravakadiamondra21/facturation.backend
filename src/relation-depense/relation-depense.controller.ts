@@ -36,4 +36,14 @@ export class RelationDepenseController {
   async count(@Param('ref_lettrage') ref_lettrage: string){
     return this.relationDepenseService.countByRef(ref_lettrage)
   }
+
+  @Get('/matched')
+  findMatched(){
+    return this.relationDepenseService.findAll()
+  }
+
+  @Get('/file')
+  findSome(){
+    return this.relationDepenseService.findSome()
+  }
 }

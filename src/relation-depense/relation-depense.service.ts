@@ -25,9 +25,7 @@ export class RelationDepenseService {
   }
 
   findAllId() {
-    return this.relationDepenseRepository.find({
-      select : ['depense']
-    })
+     return this.relationDepenseRepository.find()
   }
 
   countByRef(notnull : string){
@@ -46,6 +44,14 @@ export class RelationDepenseService {
 
   remove(id: number) {
     return `This action removes a #${id} relationDepense`;
+  }
+
+  findAll(){
+    return this.relationDepenseRepository.find();
+  }
+
+  findSome(){
+    return this.relationDepenseRepository.find()
   }
 
 }

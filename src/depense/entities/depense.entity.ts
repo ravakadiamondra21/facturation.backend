@@ -1,7 +1,6 @@
 import { Admin } from "src/admin/entities/admin.entity";
-import { Banque } from "src/banque/entities/banque.entity";
 import { RelationDepense } from "src/relation-depense/entities/relation-depense.entity";
-import { Column, CommandSucceededEvent, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany} from "typeorm";
 
 @Entity()
 export class Depense {
@@ -27,8 +26,6 @@ export class Depense {
     TVA: number;
     @Column({length: 8})
     statu: string;
-    // @Column({length: 8})
-    // ref_lettrage: string;
 
     @ManyToOne(() => Admin, (admin)=> admin.id, {
         eager: true

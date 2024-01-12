@@ -33,7 +33,7 @@ export class RelationRecetteService {
   }
 
   findAll() {
-    return `This action returns all relationRecette`;
+    return this.relationRecetteRepository.find()
   }
 
   findOne(id: number) {

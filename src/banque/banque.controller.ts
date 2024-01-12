@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param} from '@nestjs/common';
 import { BanqueService } from './banque.service';
 import { CreateBanqueDto } from './dto/create-banque.dto';
-import { UpdateBanqueDto } from './dto/update-banque.dto';
 
 
 @Controller('banque')
@@ -19,23 +18,23 @@ export class BanqueController {
     return this.banqueService.find();
   }
 
-  // // @Get(':id')
-  // // findOne(@Param('id') id: string) {
-  // //   return this.banqueService.findOne(+id);
-  // // }
+  @Get('/date_operation/:date_operation')
+  search(@Param('date_operation') date_operation: Date){
+    return this.banqueService.searchDateOperation(date_operation);
+  }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateBanqueDto: UpdateBanqueDto) {
-  //   return this.banqueService.update(+id, updateBanqueDto);
-  // }
+  @Get('/libelle/:libelle')
+  searchLibelle(@Param('libelle') libelle: string){
+    return this.banqueService.saerchLibelle(libelle)
+  }
 
-  // // @Delete(':id')
-  // // remove(@Param('id') id: string) {
-  // //   return this.banqueService.remove(+id);
-  // // }
+  @Get('/count')
+  count(){
+    return this.banqueService.countBanque()
+  }
 
-  // @Get("/count/:ref_lettrage")
-  // async count(@Param("ref_lettrage") ref_lettrage: string){
-  //   return this.banqueService.countByRef(ref_lettrage);
-  // }
+  @Get('/countByDate/:date_operation')
+  countByDaare(@Param('date_operation') date_operation: Date){
+    return this.banqueService.countByDate(date_operation)
+  }
 }

@@ -60,9 +60,10 @@ export class RecetteService {
   // //   return this.recetteRepository.findBy({statu, isValidate})
   // // }
 
-  // // count(date){
-  // //   return this.recetteRepository.countBy({date})
-  // // }
+  count(){
+    return this.recetteRepository.count()
+  }
+
   sortBy(){
     return this.recetteRepository.find({
       take : 10,
@@ -134,4 +135,16 @@ export class RecetteService {
   //     }
   //   })
   // }
+
+  countByDate(date_facture){
+    return this.recetteRepository.count({
+      where : {
+        date_facture : date_facture
+      }
+    });
+  }
+
+  countByMois(date_facture: Date){
+    return this.recetteRepository.query("select * from recette where date_format(date_facture, '%Y-%c') = '" + date_facture + "'")
+  }
 }

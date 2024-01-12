@@ -4,6 +4,6 @@ export class CreateBanqueDto {
     debit: Number;
     credit: Number;
     solde: Number;
-    chemin: string;
+
     
 }

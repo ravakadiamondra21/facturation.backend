@@ -1,6 +1,6 @@
 import { Banque } from "src/banque/entities/banque.entity";
 import { Recette } from "src/recette/entities/recette.entity";
-import { Column, Entity, ManyToMany, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 
 @Entity()
 export class RelationRecette {

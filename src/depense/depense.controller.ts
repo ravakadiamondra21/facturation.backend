@@ -63,10 +63,21 @@ export class DepenseController {
   // async count(@Param('ref_lettrage') ref_lettrage : string){
   //   return this.depenseService.countByRef(ref_lettrage)
   // }
-  // @Get('count/:date')
-  // countRecette( @Param("date") date:any){
-  //   return this.depenseService.countDepense(date)
-  // }
+
+  @Get('/count')
+  countRecette(){
+    return this.depenseService.countDepense()
+  }
+
+  @Get('/countByDate/:date_facture')
+  countByDate(@Param('date_facture') date_facture: Date){
+    return this.depenseService.countByDate(date_facture)
+  }
+
+  @Get('/countByMonth/:date_facture')
+  countByMonth(@Param('date_facture') date_facture: Date){
+    return this.depenseService.countByMois(date_facture)
+  }
 
   // @Get('/matched')
   // async findMatched(){

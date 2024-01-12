@@ -79,7 +79,6 @@ export class DepenseService {
   findDateOperation(date: Date){
     return this.depenseRepository.find({
       where: {
-
         date_operation: date
       },
       order: {
@@ -133,9 +132,9 @@ export class DepenseService {
     })
   }
 
-  // // countDepense(date){
-  // //   return this.depenseRepository.countBy({date})
-  // // }
+  countDepense(){
+    return this.depenseRepository.count()
+  }
 
   // countByRef(notnull : string){
   //   return this.depenseRepository.countBy({
@@ -153,4 +152,17 @@ export class DepenseService {
   //     }
   //   })
   // }
+
+  countByDate(date_facture: Date){
+    return this.depenseRepository.count({
+      where : {
+        date_facture : date_facture
+      }
+    })
+  }
+
+  countByMois(date_facture: Date){
+    return this.depenseRepository.query("select * from depense where date_format(date_facture, '%Y-%c') = '" + date_facture + "'")
+  }
+  
 }

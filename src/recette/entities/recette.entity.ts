@@ -1,4 +1,4 @@
-import {Column, Double, Entity, ManyToOne, OneToMany } from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { Admin } from "src/admin/entities/admin.entity";
 import { RelationRecette } from "src/relation-recette/entities/relation-recette.entity";
 
@@ -16,8 +16,6 @@ export class Recette {
     description: string;
     @Column({length: 8})
     statu: string;
-    // @Column({length: 8})
-    // ref_lettrage : string;
     @Column()
     montant_HT: Number;
     @Column()

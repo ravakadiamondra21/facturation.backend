@@ -1,7 +1,6 @@
 import { Recette } from "src/recette/entities/recette.entity";
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import * as bcrypt from 'bcrypt';
-import { ColdObservable } from "rxjs/internal/testing/ColdObservable";
+import { Column, Entity, OneToMany} from "typeorm";
+
 
 @Entity()
 export class Admin {
@@ -18,10 +17,5 @@ export class Admin {
     @OneToMany(() => Recette, (recette) => recette.admin)
     recettes: Recette[];
 
-    // constructor(admin: Partial<Admin>){
-    //     Object.assign(this, admin);
-    // }
-    async validatePassword(mdp: string): Promise<boolean>{
-        return bcrypt.compare(mdp, this.mdp)
-    }
+    
 }

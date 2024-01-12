@@ -6,5 +6,5 @@ export class UpdateBanqueDto {
     debit: Number;
     credit: Number;
     solde: Number;
-    chemin: string;
+
 }

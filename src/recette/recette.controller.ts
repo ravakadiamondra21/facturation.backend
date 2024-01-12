@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RecetteService } from './recette.service';
 import { CreateRecetteDto } from './dto/create-recette.dto';
 import { UpdateRecetteDto } from './dto/update-recette.dto';
+import { count } from 'rxjs';
 
 @Controller('recette')
 export class RecetteController {
@@ -49,10 +50,11 @@ export class RecetteController {
     return this.recetteService.sortBy()
   }
 
-  // // @Get('count/:date')
-  // // count(@Param('date') date: any){
-  // //   return this.recetteService.count(date);
-  // // }
+  @Get('/count')
+  count(){
+    return this.recetteService.count();
+  }
+
   @Get("/date_op/:date_operation/:banque/:other")
   async findeByDateOperation(@Param("date_operation") date_operation: string,@Param('banque') banque:string, @Param('other') other:string){
     return this.recetteService.findByDateOperation(date_operation, banque, other)
@@ -77,6 +79,16 @@ export class RecetteController {
   @Get('/date_operation/:date_operation')
   async findOperation(@Param("date_operation") date_operation: Date){
     return this.recetteService.findDateOperation(date_operation)
+  }
+
+  @Get('/countByDate/:date_facture')
+  countByDate(@Param('date_facture') date_facture: Date){
+    return this.recetteService.countByDate(date_facture)
+  }
+
+  @Get('/countByMonth/:date_facture')
+  countByMonth(@Param('date_facture') date_facture: Date){
+    return this.recetteService.countByMois(date_facture)
   }
 
   // @Get('/matched')
